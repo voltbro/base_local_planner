@@ -189,11 +189,6 @@ namespace base_local_planner {
 
     const geometry_msgs::PoseStamped& plan_goal_pose = global_plan.back();
     
-    // wait allow transform 
-    tf2_ros::Buffer tfBuffer;
-    tf2_ros::TransformListener tfListener(tfBuffer);
-    while(!tfBuffer.canTransform(global_frame, plan_goal_pose.header.frame_id, ros::Time(), ros::Duration(1.0)));
-
     try{
       geometry_msgs::TransformStamped transform = tf.lookupTransform(global_frame, ros::Time(),
                          plan_goal_pose.header.frame_id, plan_goal_pose.header.stamp,
